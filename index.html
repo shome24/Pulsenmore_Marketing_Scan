@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulsenmore Marketing Scan Review - Jozzy & BPP</title>
+  <meta name="description" content="Pulsenmore multi-step ultrasound clinical scan review tool featuring App Guided (Jozzy) and Clinician Guided (BPP) protocols.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="brand">
+        <!-- Pulsenmore Soundwave Pulse Logo -->
+        <div class="pulsenmore-logo-icon" aria-label="Pulsenmore Logo">
+          <span class="wave-bar bar-1"></span>
+          <span class="wave-bar bar-2"></span>
+          <span class="wave-bar bar-3"></span>
+          <span class="wave-bar bar-4"></span>
+          <span class="wave-bar bar-5"></span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">PULSENMORE</span>
+          <span class="brand-divider">/</span>
+          <span class="brand-subtitle">Marketing Scan Viewer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center: Quick Scan Switcher Pills -->
+    <div class="nav-center">
+      <div class="scan-pill-toggle">
+        <button class="scan-pill-btn active" id="btnNavJozzy" data-scan-id="jozzy">
+          <span class="pill-dot ag-dot"></span>
+          <span class="pill-name">Jozzy</span>
+          <span class="pill-tag ag-tag">App Guided &bull; W34</span>
+        </button>
+        <button class="scan-pill-btn" id="btnNavBpp" data-scan-id="bpp">
+          <span class="pill-dot cg-dot"></span>
+          <span class="pill-name">BPP Study</span>
+          <span class="pill-tag cg-tag">Clinician Guided &bull; W29</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <div class="protocol-status-badge">
+        <span class="status-indicator-dot"></span>
+        <span id="scanStatusIndicator">Ready &bull; 2 Scans Loaded</span>
+      </div>
+      <button class="nav-btn-icon" id="btnQuickInfo" title="About this review tool">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+        <span class="btn-label">Protocol Info</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="scan-viewer-app">
+    <!-- Hero Section: Scan Selection Cards -->
+    <section class="scan-selection-section">
+      <div class="section-header-row">
+        <div>
+          <h1 class="portal-main-heading">Clinical Ultrasound Scan Library</h1>
+          <p class="portal-sub-heading">Select an ultrasound examination to review its complete sequential clinical steps.</p>
+        </div>
+        <div class="scan-count-badge">
+          <span>2 Clinical Scans Available</span>
+        </div>
+      </div>
+
+      <div class="scan-cards-grid">
+        <!-- Scan Card 1: Jozzy (App Guided) -->
+        <div class="scan-select-card active" id="cardScanJozzy" data-scan-id="jozzy" tabindex="0">
+          <div class="card-glow-indicator ag-glow"></div>
+          <div class="card-header-badge-row">
+            <span class="badge-mode-pill ag-pill">
+              <span class="mode-bullet ag-bullet"></span> App Guided (AG)
+            </span>
+            <span class="badge-week-pill">Gestational Week 34</span>
+          </div>
+          <h2 class="scan-card-title">Jozzy Scan</h2>
+          <p class="scan-card-desc">Patient-administered at-home scanning guided step-by-step by the Pulsenmore mobile application.</p>
+          <div class="scan-card-meta">
+            <div class="meta-field">
+              <span class="field-label">Protocol Steps</span>
+              <span class="field-value highlight-cyan">5 Sequential Clips</span>
+            </div>
+            <div class="meta-field">
+              <span class="field-label">Patient Key</span>
+              <span class="field-value font-mono">3N766C5QWYXK_1</span>
+            </div>
+            <div class="meta-field">
+              <span class="field-label">Finding Targets</span>
+              <span class="field-value">Cardiac, Movement, MVP</span>
+            </div>
+          </div>
+          <div class="card-select-footer">
+            <span class="selection-indicator-text">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Currently Viewing
+            </span>
+            <span class="view-scan-action-link">View Scan &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Scan Card 2: BPP (Clinician Guided) -->
+        <div class="scan-select-card" id="cardScanBpp" data-scan-id="bpp" tabindex="0">
+          <div class="card-glow-indicator cg-glow"></div>
+          <div class="card-header-badge-row">
+            <span class="badge-mode-pill cg-pill">
+              <span class="mode-bullet cg-bullet"></span> Clinician Guided (CG)
+            </span>
+            <span class="badge-week-pill">Gestational Week 29</span>
+          </div>
+          <h2 class="scan-card-title">BPP Study</h2>
+          <p class="scan-card-desc">Comprehensive Biophysical Profile scan protocol conducted under direct clinician guidance.</p>
+          <div class="scan-card-meta">
+            <div class="meta-field">
+              <span class="field-label">Protocol Steps</span>
+              <span class="field-value highlight-red">10 Sequential Clips</span>
+            </div>
+            <div class="meta-field">
+              <span class="field-label">Patient Key</span>
+              <span class="field-value font-mono">EZ4JQNG5MWAR_1</span>
+            </div>
+            <div class="meta-field">
+              <span class="field-label">Finding Targets</span>
+              <span class="field-value">Fetal Tone, Breathing, MVP</span>
+            </div>
+          </div>
+          <div class="card-select-footer">
+            <span class="selection-indicator-text">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Select Scan
+            </span>
+            <span class="view-scan-action-link">View Scan &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Ultrasound Review Area (Large Screen + Carousel + Case Properties) -->
+    <section class="main-review-workspace" id="reviewWorkspace">
+      <!-- Active Scan Header Bar -->
+      <div class="active-scan-header-bar">
+        <div class="active-scan-title-group">
+          <div class="scan-identity-row">
+            <span class="active-mode-badge" id="activeModeBadge">App Guided (AG)</span>
+            <h2 class="active-scan-heading" id="activeScanHeading">Jozzy &mdash; Gestational Week 34</h2>
+            <span class="active-key-badge" id="activeKeyBadge">3N766C5QWYXK_1</span>
+          </div>
+          <div class="active-step-title-row">
+            <span class="step-counter-tag" id="activeStepCounterTag">Step 1 of 5</span>
+            <span class="step-name-heading" id="activeStepNameHeading">Step 1: Scan Overview & Anatomical Landmarks</span>
+          </div>
+        </div>
+
+        <div class="active-scan-tools-group">
+          <div class="assistants-badge" title="Pulsenmore Scan Assistant">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            Tutorial
+          </div>
+          <div class="measurements-badge" title="Clinical Measurements">
+            <span>&#9829; FHR</span>
+            <span class="dot-sep">&bull;</span>
+            <span>MVP</span>
+          </div>
+          <button class="action-btn download-clip-btn" id="btnDownloadClip" title="Download current clip">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>DOWNLOAD STEP</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Two Column Layout: Main Player on Left, Case Properties on Right -->
+      <div class="workspace-grid-layout">
+        <!-- Left / Center Column: Large Screen Video Player & Carousel -->
+        <div class="primary-player-column">
+          <!-- Large Ultrasound Screen Container -->
+          <div class="large-player-frame" id="largePlayerFrame">
+            <!-- Ultrasound Depth Calibration Scale (Right Edge 0 - 150 cm) -->
+            <div class="depth-scale-overlay" aria-hidden="true">
+              <div class="depth-marker depth-0"><span>0</span></div>
+              <div class="depth-marker depth-50"><span>50</span></div>
+              <div class="depth-marker depth-100"><span>100</span></div>
+              <div class="depth-marker depth-150"><span>150</span></div>
+            </div>
+
+            <!-- Medical HUD Overlay (Top-Left) -->
+            <div class="ultrasound-hud" id="ultrasoundHud">
+              <div class="hud-item hud-timestamp" id="hudTimestamp">13 Oct 2026 10:10:41 AM</div>
+              <div class="hud-grid-row">
+                <span class="hud-item">MI: <strong id="hudMI">0.6</strong></span>
+                <span class="hud-item">TIS: <strong id="hudTIS">0.1</strong></span>
+                <span class="hud-item">FPS: <strong id="hudFPS">25 Hz</strong></span>
+              </div>
+              <div class="hud-grid-row">
+                <span class="hud-item">Depth: <strong id="hudDepth">18.0 cm</strong></span>
+                <span class="hud-item">Gain: <strong id="hudGain">73 %</strong></span>
+                <span class="hud-item">Freq: <strong id="hudFreq">5 MHz</strong></span>
+              </div>
+            </div>
+
+            <!-- Main HTML5 Video Element -->
+            <video id="mainVideoPlayer" playsinline preload="auto">
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Center Play Button Overlay -->
+            <button class="video-center-play-btn" id="centerPlayBtn" aria-label="Play or pause video">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
+
+            <!-- Floating Next / Prev Step Chevrons -->
+            <button class="step-nav-chevron prev-chevron" id="btnPrevStepChevron" title="Previous Step (Left Arrow)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="step-nav-chevron next-chevron" id="btnNextStepChevron" title="Next Step (Right Arrow)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+
+            <!-- Player Bottom Controls Bar -->
+            <div class="player-controls-bar">
+              <!-- Scrubber Timeline -->
+              <div class="scrubber-container">
+                <input type="range" class="player-scrubber" id="playerScrubber" min="0" max="100" value="0" step="0.1">
+                <div class="scrubber-progress" id="scrubberProgress"></div>
+              </div>
+
+              <!-- Controls Row -->
+              <div class="controls-row">
+                <div class="controls-left">
+                  <button class="ctrl-btn" id="btnPlayPause" title="Play/Pause (Space)">
+                    <svg class="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                      <rect x="6" y="4" width="4" height="16"></rect>
+                      <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                  </button>
+
+                  <!-- Frame-by-frame step buttons -->
+                  <button class="ctrl-btn frame-step-btn" id="btnPrevFrame" title="Step Back 1 Frame (-0.04s)">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                      <line x1="5" y1="19" x2="5" y2="5"></line>
+                    </svg>
+                  </button>
+                  <button class="ctrl-btn frame-step-btn" id="btnNextFrame" title="Step Forward 1 Frame (+0.04s)">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                      <line x1="19" y1="5" x2="19" y2="19"></line>
+                    </svg>
+                  </button>
+
+                  <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+                </div>
+
+                <div class="controls-right">
+                  <!-- Playback Speeds (0.25x slow motion for valves up to 2x) -->
+                  <div class="speed-selector-wrapper">
+                    <button class="speed-badge-btn" id="btnSpeedSelector" title="Playback Speed">1.0x</button>
+                    <div class="speed-menu" id="speedMenu" style="display: none;">
+                      <button data-speed="0.25">0.25x (Valve Slow-Mo)</button>
+                      <button data-speed="0.5">0.5x</button>
+                      <button data-speed="0.75">0.75x</button>
+                      <button data-speed="1.0" class="active">1.0x (Normal)</button>
+                      <button data-speed="1.25">1.25x</button>
+                      <button data-speed="1.5">1.5x</button>
+                      <button data-speed="2.0">2.0x</button>
+                    </div>
+                  </div>
+
+                  <!-- Loop Toggle -->
+                  <button class="ctrl-btn active" id="btnLoopToggle" title="Loop playback (On)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="17 1 21 5 17 9"></polyline>
+                      <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                      <polyline points="7 23 3 19 7 15"></polyline>
+                      <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                    </svg>
+                  </button>
+
+                  <!-- HUD Overlay Toggle -->
+                  <button class="ctrl-btn active" id="btnToggleHud" title="Toggle Medical HUD Overlay">
+                    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">HUD</span>
+                  </button>
+
+                  <!-- Fullscreen -->
+                  <button class="ctrl-btn" id="btnFullscreen" title="Toggle Fullscreen (F)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step Carousel / Filmstrip Section -->
+          <div class="carousel-container-block">
+            <div class="carousel-header-bar">
+              <div class="carousel-title-group">
+                <h3 class="carousel-heading">Scan Steps Carousel</h3>
+                <span class="carousel-subtext" id="carouselSubtext">Click any step thumbnail below to load it into the main screen</span>
+              </div>
+              <div class="carousel-nav-controls">
+                <button class="carousel-arrow-btn" id="carouselScrollLeft" title="Scroll carousel left">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button class="carousel-arrow-btn" id="carouselScrollRight" title="Scroll carousel right">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Horizontal Scrollable Step Filmstrip -->
+            <div class="step-carousel-track" id="stepCarouselTrack">
+              <!-- Step Cards dynamically injected here by app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Case Properties & Clinical Review -->
+        <aside class="case-properties-column">
+          <!-- Tab Navigation -->
+          <div class="properties-tabs-nav">
+            <button class="prop-tab-btn active" data-tab="properties">CASE PROPERTIES</button>
+            <button class="prop-tab-btn" data-tab="parameters">US PARAMETERS</button>
+            <button class="prop-tab-btn" data-tab="protocol">PROTOCOL</button>
+          </div>
+
+          <!-- Tab Pane 1: Case Properties -->
+          <div class="prop-tab-content active" id="paneProperties">
+            <div class="prop-card-group">
+              <div class="property-line">
+                <span class="prop-lbl">Scan Name:</span>
+                <span class="prop-val highlight-val" id="cpScanName">Jozzy</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Protocol Mode:</span>
+                <span class="prop-val" id="cpModeLabel">App Guided (AG)</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Gestational Age:</span>
+                <span class="prop-val" id="cpGestationalAge">Week 34</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Active Step:</span>
+                <span class="prop-val font-semibold" id="cpActiveStep">Step 1 of 5</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Current Clip File:</span>
+                <span class="prop-val font-mono" id="cpFilename">3N766C5QWYXK_1_1.webm</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Scan Key:</span>
+                <span class="prop-val font-mono" id="cpScanKey">3N766C5QWYXK_1</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Total Steps:</span>
+                <span class="prop-val" id="cpTotalSteps">5 Steps</span>
+              </div>
+            </div>
+
+            <!-- Clinical Assessment Card -->
+            <div class="clinical-assessment-card">
+              <div class="assessment-card-header">
+                <span class="assessment-card-title">CLINICAL ASSESSMENT</span>
+                <span class="assessment-status-badge authorized">AUTHORIZED</span>
+              </div>
+              <p class="assessment-body-text" id="cpAssessmentText">
+                Ultrasound clip demonstrates anatomical landmarks appropriate for gestational age. Acoustic penetration and cardiac activity confirmed.
+              </p>
+              <div class="assessment-signature-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Pulsenmore Clinical Verification Team</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Pane 2: US Parameters -->
+          <div class="prop-tab-content" id="paneParameters" style="display: none;">
+            <div class="prop-card-group">
+              <div class="property-line">
+                <span class="prop-lbl">Ultrasound Device:</span>
+                <span class="prop-val">Pulsenmore ES Handheld</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Transducer:</span>
+                <span class="prop-val">Curvilinear Array</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Acoustic Frequency:</span>
+                <span class="prop-val">5.0 MHz</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Acoustic Depth:</span>
+                <span class="prop-val">18.0 cm</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Frame Rate:</span>
+                <span class="prop-val">25 Hz</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Mechanical Index (MI):</span>
+                <span class="prop-val">0.6</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Thermal Index (TIS):</span>
+                <span class="prop-val">0.1</span>
+              </div>
+              <div class="property-line">
+                <span class="prop-lbl">Preset:</span>
+                <span class="prop-val">Obstetric Fetal Scan</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Pane 3: Protocol Breakdown -->
+          <div class="prop-tab-content" id="paneProtocol" style="display: none;">
+            <div class="prop-card-group">
+              <div class="protocol-overview-text" id="cpProtocolOverview">
+                This ultrasound examination consists of sequential clinical steps acquired according to the Pulsenmore clinical scanning standard.
+              </div>
+              <ol class="protocol-steps-list" id="protocolStepsList">
+                <!-- Dynamically populated -->
+              </ol>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Help & Protocol Information Modal -->
+  <div class="modal-backdrop" id="infoModal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-card info-modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Pulsenmore Marketing Scan Review &mdash; Architecture</h2>
+        <button class="modal-close-btn" id="btnCloseInfoModal">&times;</button>
+      </div>
+      <div class="info-modal-content">
+        <h3>Two Clinical Scan Protocols</h3>
+        <p>This marketing review tool features two real Pulsenmore ultrasound clinical scans located in the <code>Video_02</code> directory:</p>
+        
+        <div class="protocol-spec-cards">
+          <div class="protocol-spec-box ag-box">
+            <h4>1. Jozzy (App Guided)</h4>
+            <ul>
+              <li><strong>Scan Mode:</strong> App Guided (AG)</li>
+              <li><strong>Gestational Age:</strong> Week 34</li>
+              <li><strong>Protocol Steps:</strong> 5 Sequential Clips (<code>3N766C5QWYXK_1_1</code> to <code>1_5</code>)</li>
+              <li><strong>Path:</strong> <code>Video_02/Jozzy_App Guided, Gestetional week 34/</code></li>
+            </ul>
+          </div>
+
+          <div class="protocol-spec-box cg-box">
+            <h4>2. BPP Study (Clinician Guided)</h4>
+            <ul>
+              <li><strong>Scan Mode:</strong> Clinician Guided (CG)</li>
+              <li><strong>Gestational Age:</strong> Week 29</li>
+              <li><strong>Protocol Steps:</strong> 10 Sequential Clips (<code>EZ4JQNG5MWAR_1_1</code> to <code>1_10</code>)</li>
+              <li><strong>Path:</strong> <code>Video_02/Pulsenmore ES, Clinician Guided, Gestational Week - 29 (Source BPP Study)/</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <h4>Interactive Carousel Navigation</h4>
+        <p>The main large screen displays the active step clip. The bottom carousel displays thumbnails for all steps in the scan. <strong>Clicking any thumbnail changes the main screen video immediately.</strong></p>
+
+        <h4>Keyboard Shortcuts</h4>
+        <ul>
+          <li><kbd>Space</kbd> Play / Pause video</li>
+          <li><kbd>&larr;</kbd> Previous step</li>
+          <li><kbd>&rarr;</kbd> Next step</li>
+          <li><kbd>F</kbd> Toggle Fullscreen</li>
+          <li><kbd>1</kbd> Switch to Jozzy scan</li>
+          <li><kbd>2</kbd> Switch to BPP scan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toastMessage"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

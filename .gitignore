@@ -1,0 +1,8 @@
+# Ignore legacy video directories to keep marketing repository lightweight (< 50MB)
+/Video/
+/videos/
+
+# Temporary, build, and system files
+*.log
+.DS_Store
+Thumbs.db
