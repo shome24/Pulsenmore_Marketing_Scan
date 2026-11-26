@@ -605,6 +605,40 @@
       navigateStep(1);
     });
 
+    // Mobile Touch Swipe Navigation on Large Player Frame
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    elements.largePlayerFrame.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    elements.largePlayerFrame.addEventListener('touchend', (e) => {
+      if (e.changedTouches.length === 1) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const elapsedTime = Date.now() - touchStartTime;
+
+        // Valid horizontal swipe: under 600ms, > 40px deltaX, deltaX dominant over deltaY
+        if (elapsedTime < 600 && Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+          if (deltaX < 0) {
+            // Swiped left -> Next Step
+            navigateStep(1);
+          } else {
+            // Swiped right -> Previous Step
+            navigateStep(-1);
+          }
+        }
+      }
+    }, { passive: true });
+
     // Scrubber & Progress Tracking
     elements.mainVideoPlayer.addEventListener('timeupdate', () => {
       const v = elements.mainVideoPlayer;
