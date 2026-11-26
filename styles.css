@@ -1583,307 +1583,804 @@ body.dark-theme {
   }
 }
 
-/* Standard Mobile Devices (max-width: 768px) */
+/* Mobile-only elements (hidden by default on desktop) */
+.mobile-menu-btn,
+.mobile-details-pill,
+.drawer-header-mobile,
+.drawer-mobile-action,
+.drawer-backdrop {
+  display: none;
+}
+
+/* ==========================================================================
+   Mobile-Only Light Mode & Minimal-Distraction Video-First Architecture
+   ========================================================================== */
 @media (max-width: 768px) {
-  /* Navigation */
+  /* Soft Light Mode Palette */
+  :root {
+    --mobile-bg: #f8fafc;
+    --mobile-surface: #ffffff;
+    --mobile-border: #e2e8f0;
+    --mobile-border-light: #f1f5f9;
+    --mobile-text: #0f172a;
+    --mobile-text-secondary: #334155;
+    --mobile-text-muted: #64748b;
+    --mobile-text-dim: #94a3b8;
+    --mobile-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+    --mobile-shadow-md: 0 6px 18px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    --mobile-shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.14), 0 4px 10px -2px rgba(15, 23, 42, 0.06);
+  }
+
+  body.dark-theme {
+    background-color: var(--mobile-bg);
+    color: var(--mobile-text);
+  }
+
+  body.drawer-open {
+    overflow: hidden;
+  }
+
+  .scan-viewer-app {
+    padding: 0.5rem 0.65rem 2rem;
+    background-color: var(--mobile-bg);
+  }
+
+  /* 1. Header & Navigation (Clean Soft Light Mode) */
   .top-nav {
     flex-wrap: wrap;
-    padding: 0.65rem 0.85rem;
-    gap: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    gap: 0.5rem;
+    background-color: var(--mobile-surface);
+    border-bottom: 1px solid var(--mobile-border);
+    box-shadow: var(--mobile-shadow-sm);
   }
+
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .pulsenmore-logo-icon {
+    height: 22px;
+  }
+
+  .wave-bar {
+    width: 3.5px;
+    box-shadow: none;
+  }
+
   .brand-text {
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
+
   .brand-title {
     font-size: 0.85rem;
-    letter-spacing: 0.8px;
+    font-weight: 700;
+    color: var(--mobile-text);
+    letter-spacing: 0.5px;
   }
-  .brand-subtitle {
+
+  .brand-subtitle,
+  .brand-divider {
     display: none;
   }
+
+  /* Scan Switcher: Clean Soft Segmented Control */
   .nav-center {
     order: 3;
     width: 100%;
-    margin-top: 0.25rem;
+    margin-top: 0.15rem;
   }
+
   .scan-pill-toggle {
     width: 100%;
     display: flex;
-    gap: 4px;
-    padding: 2px;
+    gap: 3px;
+    padding: 3px;
+    background: #f1f5f9;
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-full);
   }
+
   .scan-pill-btn {
     flex: 1;
     justify-content: center;
     padding: 0.45rem 0.5rem;
     font-size: 0.775rem;
-    min-height: 38px;
+    min-height: 36px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--mobile-text-muted);
+    font-weight: 600;
+    transition: all var(--transition-fast);
   }
+
+  .scan-pill-btn.active {
+    background: var(--mobile-surface);
+    color: var(--mobile-text);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+
+  .scan-pill-btn .pill-tag {
+    font-size: 0.675rem;
+    padding: 1px 6px;
+    border-radius: var(--radius-full);
+  }
+
+  .ag-tag {
+    background: #f0f9ff;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+  }
+
+  .cg-tag {
+    background: #fef2f2;
+    color: #e53935;
+    border: 1px solid #fecaca;
+  }
+
   .nav-right {
+    gap: 0.4rem;
+  }
+
+  .protocol-status-badge,
+  .nav-btn-icon#btnQuickInfo {
+    display: none; /* Hide cluttered status indicators from main header */
+  }
+
+  /* Mobile Menu Button */
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: #f1f5f9;
+    color: var(--mobile-text);
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-full);
+    font-size: 0.775rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 34px;
+    transition: all var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-menu-btn:active {
+    background: #e2e8f0;
+    transform: scale(0.97);
+  }
+
+  .mobile-menu-btn svg {
+    color: var(--mobile-text-secondary);
+  }
+
+  /* 2. Remove Information Load: Hide Hero Selection Cards Entirely */
+  .scan-selection-section {
+    display: none !important; /* Zero visual clutter - straight to the video player! */
+  }
+
+  /* 3. Main Workspace Layout */
+  .main-review-workspace {
+    margin-top: 0;
+  }
+
+  .workspace-grid-layout {
+    display: block; /* 100% video and carousel focus */
+  }
+
+  .primary-player-column {
+    border: none;
+    padding: 0;
+  }
+
+  /* 4. Streamlined Active Scan Header Bar */
+  .active-scan-header-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--mobile-surface);
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-lg);
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 0.65rem;
+    box-shadow: var(--mobile-shadow-sm);
     gap: 0.5rem;
   }
-  .btn-label {
-    display: none;
+
+  .active-scan-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
   }
-  .protocol-status-badge {
-    padding: 3px 8px;
-    font-size: 0.7rem;
+
+  .scan-identity-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
-  #scanStatusIndicator {
-    max-width: 120px;
+
+  .active-mode-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    background: #fef2f2;
+    color: #e53935;
+    border: 1px solid #fecaca;
+  }
+
+  .active-scan-heading {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--mobile-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  /* Scan Selection Hero */
-  .section-header-row {
-    margin-bottom: 0.85rem;
-  }
-  .portal-main-heading {
-    font-size: 1.25rem;
-  }
-  .portal-sub-heading {
-    font-size: 0.825rem;
-  }
-  .scan-select-card {
-    padding: 1rem 1.15rem;
-    border-radius: var(--radius-lg);
-  }
-  .scan-card-title {
-    font-size: 1.15rem;
-  }
-  .scan-card-desc {
-    font-size: 0.8rem;
-    min-height: auto;
-    margin-bottom: 0.75rem;
-  }
-  .scan-card-meta {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    padding: 0.6rem 0.75rem;
-  }
-  .scan-card-meta .meta-field:nth-child(3) {
-    grid-column: span 2;
+  .active-key-badge,
+  .active-scan-tools-group {
+    display: none; /* Hide dense metadata from video header */
   }
 
-  /* Active Scan Header */
-  .active-scan-header-bar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0.85rem 1rem;
-    gap: 0.75rem;
-  }
-  .scan-identity-row {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .active-scan-heading {
-    font-size: 1rem;
-  }
   .active-step-title-row {
-    font-size: 0.8rem;
-    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
     gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--mobile-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .active-scan-tools-group {
-    width: 100%;
+
+  .step-counter-tag {
+    background: #f1f5f9;
+    color: var(--mobile-text-secondary);
+    font-weight: 600;
+    font-size: 0.65rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .step-name-heading {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+
+  /* Quick Details Pill inside Header Bar */
+  .mobile-details-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0.3rem 0.6rem;
+    background: #f1f5f9;
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-full);
+    color: var(--mobile-text-secondary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-details-pill:active {
+    background: #e2e8f0;
+  }
+
+  /* 5. Main Ultrasound Video Player (Hero Screen) */
+  .large-player-frame {
+    aspect-ratio: 16 / 9;
+    max-height: 60vw;
+    background: #080b0f; /* Ultrasound acoustic viewing backdrop */
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--mobile-border);
+    box-shadow: var(--mobile-shadow-md);
+    position: relative;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .depth-scale-overlay {
+    top: 6px;
+    right: 6px;
+    bottom: 50px;
+    width: 18px;
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .ultrasound-hud {
+    top: 6px;
+    left: 6px;
+    padding: 4px 7px;
+    font-size: 8.5px;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    gap: 2px;
+  }
+
+  .hud-timestamp {
+    font-size: 7.5px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .video-center-play-btn {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-brand-red);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .step-nav-chevron {
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.88);
+    color: #0f172a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .prev-chevron { left: 6px; }
+  .next-chevron { right: 6px; }
+
+  /* Player Bottom Controls */
+  .player-controls-bar {
+    padding: 0.65rem 0.65rem 0.45rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.88) 100%);
+  }
+
+  .scrubber-container {
+    height: 4px;
+    margin-bottom: 0.4rem;
+  }
+
+  .controls-row {
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+  }
+
+  .controls-left {
+    gap: 0.35rem;
+  }
+
+  .ctrl-btn {
+    padding: 4px;
+    color: #ffffff;
+  }
+
+  .frame-step-btn {
+    display: none; /* Hide frame-by-frame on mobile for uncluttered controls */
+  }
+
+  .time-display {
+    font-size: 0.675rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .controls-right {
+    gap: 0.35rem;
+  }
+
+  .speed-badge-btn {
+    padding: 2px 6px;
+    font-size: 0.65rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+  }
+
+  .speed-menu {
+    bottom: 30px;
+    right: -10px;
+    background: #ffffff;
+    border: 1px solid var(--mobile-border);
+    box-shadow: var(--mobile-shadow-lg);
+  }
+
+  .speed-menu button {
+    color: var(--mobile-text);
+    font-size: 0.75rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .speed-menu button:hover,
+  .speed-menu button.active {
+    background: #f1f5f9;
+    color: var(--color-brand-red);
+  }
+
+  /* 6. Scan Steps Carousel (Clean Light Mode Filmstrip) */
+  .carousel-container-block {
+    background: var(--mobile-surface);
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem 0.85rem 0.85rem;
+    margin-top: 0.65rem;
+    box-shadow: var(--mobile-shadow-sm);
+  }
+
+  .carousel-header-bar {
+    margin-bottom: 0.45rem;
+  }
+
+  .carousel-heading {
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: var(--mobile-text);
+  }
+
+  .carousel-subtext {
+    display: none; /* Minimalist clean view */
+  }
+
+  .carousel-arrow-btn {
+    width: 26px;
+    height: 26px;
+    background: #f1f5f9;
+    border: 1px solid var(--mobile-border);
+    color: var(--mobile-text-secondary);
+  }
+
+  .step-carousel-track {
+    gap: 0.65rem;
+    padding: 3px 2px 6px;
+  }
+
+  .step-card {
+    flex: 0 0 160px;
+    background: var(--mobile-surface);
+    border: 1.5px solid var(--mobile-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--mobile-shadow-sm);
+  }
+
+  .step-card.active {
+    border-color: var(--color-brand-red);
+    box-shadow: 0 3px 12px rgba(229, 57, 53, 0.18);
+  }
+
+  .step-card.ag-step.active {
+    border-color: #0284c7;
+    box-shadow: 0 3px 12px rgba(2, 132, 199, 0.18);
+  }
+
+  .step-card-thumb-wrap {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .step-card-badge-step {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    background: rgba(15, 23, 42, 0.78);
+    color: #ffffff;
+  }
+
+  .step-card-duration {
+    font-size: 0.6rem;
+    background: rgba(15, 23, 42, 0.78);
+    color: #ffffff;
+  }
+
+  .step-card-content {
+    padding: 0.5rem 0.6rem;
+    background: var(--mobile-surface);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .step-card-title {
+    font-size: 0.725rem;
+    font-weight: 600;
+    color: var(--mobile-text);
+  }
+
+  .step-card-status-label {
+    font-size: 0.65rem;
+    color: var(--mobile-text-muted);
+  }
+
+  .step-card.active .step-card-status-label {
+    color: var(--color-brand-red);
+    font-weight: 700;
+  }
+
+  .step-card.ag-step.active .step-card-status-label {
+    color: #0284c7;
+  }
+
+  /* 7. Slide-Out Clinical Details & Protocol Drawer */
+  .case-properties-column {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 88vw;
+    max-width: 380px;
+    z-index: 1050;
+    background: var(--mobile-surface);
+    border-left: 1px solid var(--mobile-border);
+    box-shadow: -8px 0 32px rgba(15, 23, 42, 0.16);
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    border-radius: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .case-properties-column.open {
+    transform: translateX(0);
+  }
+
+  /* Drawer Header */
+  .drawer-header-mobile {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .assistants-badge, .measurements-badge {
-    font-size: 0.7rem;
-    padding: 3px 7px;
-  }
-  .download-clip-btn {
-    flex: 1;
-    min-width: 140px;
-    justify-content: center;
-    min-height: 36px;
+    padding: 1rem 1.15rem 0.85rem;
+    border-bottom: 1px solid var(--mobile-border);
+    background: #f8fafc;
   }
 
-  /* Main Video Player on Mobile */
-  .large-player-frame {
-    aspect-ratio: 16 / 9;
-    max-height: 58vw;
-    touch-action: pan-y;
-  }
-  .depth-scale-overlay {
-    top: 8px;
-    right: 8px;
-    bottom: 52px;
-    width: 20px;
-    font-size: 8px;
-  }
-  .ultrasound-hud {
-    top: 8px;
-    left: 8px;
-    padding: 4px 8px;
-    font-size: 9px;
+  .drawer-title-wrap {
+    display: flex;
+    flex-direction: column;
     gap: 2px;
   }
-  .hud-timestamp {
-    font-size: 8px;
-  }
-  .hud-grid-row {
-    gap: 6px;
-  }
-  .video-center-play-btn {
-    width: 58px;
-    height: 58px;
-  }
-  .step-nav-chevron {
-    width: 38px;
-    height: 38px;
-  }
-  .prev-chevron { left: 8px; }
-  .next-chevron { right: 8px; }
 
-  /* Controls Bar on Mobile */
-  .player-controls-bar {
-    padding: 0.85rem 0.75rem 0.55rem;
-  }
-  .controls-row {
-    flex-wrap: wrap;
-    gap: 0.35rem;
-  }
-  .controls-left, .controls-right {
-    gap: 0.4rem;
-  }
-  .time-display {
-    font-size: 0.7rem;
-  }
-  .speed-menu {
-    bottom: 35px;
-    right: -25px;
-    min-width: 120px;
-  }
-
-  /* Carousel on Mobile */
-  .carousel-container-block {
-    padding: 0.85rem 1rem 1rem;
-  }
-  .carousel-header-bar {
-    margin-bottom: 0.15rem;
-  }
-  .carousel-heading {
-    font-size: 0.875rem;
-  }
-  .carousel-subtext {
-    font-size: 0.7rem;
-    display: none;
-  }
-  .step-carousel-track {
-    gap: 0.75rem;
-    padding: 4px 2px 8px;
-  }
-  .step-card {
-    flex: 0 0 175px;
-  }
-  .step-card-content {
-    padding: 0.5rem 0.6rem;
-  }
-  .step-card-title {
-    font-size: 0.725rem;
-  }
-  .step-card-status-label {
+  .drawer-subtitle {
     font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--color-brand-red);
   }
 
-  /* Case Properties Sidebar on Mobile */
-  .case-properties-column {
-    max-height: 480px;
+  .drawer-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--mobile-text);
   }
+
+  .drawer-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: #e2e8f0;
+    border: none;
+    font-size: 1.35rem;
+    color: var(--mobile-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  /* Drawer Quick Download Action */
+  .drawer-mobile-action {
+    display: block;
+    padding: 0.75rem 1.15rem 0.25rem;
+  }
+
+  .drawer-download-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: var(--color-brand-red);
+    font-weight: 600;
+    font-size: 0.775rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  .drawer-download-btn:active {
+    background: #fee2e2;
+  }
+
+  /* Drawer Tab Navigation */
   .properties-tabs-nav {
+    display: flex;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--mobile-border);
+    padding: 0 0.5rem;
     overflow-x: auto;
   }
+
   .prop-tab-btn {
-    padding: 0.75rem 0.35rem;
+    flex: 1;
+    padding: 0.75rem 0.4rem;
     font-size: 0.675rem;
-    min-height: 40px;
-  }
-  .prop-tab-content {
-    padding: 1rem 0.85rem;
-    gap: 0.85rem;
-  }
-  .prop-card-group, .clinical-assessment-card {
-    padding: 0.85rem;
-  }
-  .property-line {
-    font-size: 0.775rem;
-  }
-  .prop-val {
-    max-width: 62%;
-    word-break: break-all;
+    font-weight: 600;
+    color: var(--mobile-text-muted);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    text-align: center;
   }
 
-  /* Info Modal */
-  .protocol-spec-cards {
-    grid-template-columns: 1fr;
+  .prop-tab-btn.active {
+    color: var(--mobile-text);
+    border-bottom-color: var(--color-brand-red);
+    background: transparent;
   }
+
+  .prop-tab-content {
+    padding: 1rem 1.15rem;
+    background: var(--mobile-surface);
+  }
+
+  .prop-card-group {
+    background: #f8fafc;
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .property-line {
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .prop-lbl {
+    color: var(--mobile-text-muted);
+  }
+
+  .prop-val {
+    color: var(--mobile-text);
+    font-weight: 600;
+  }
+
+  .prop-val.highlight-val {
+    color: var(--color-brand-red);
+  }
+
+  .clinical-assessment-card {
+    background: #f8fafc;
+    border: 1px solid var(--mobile-border);
+    border-radius: var(--radius-md);
+    padding: 0.85rem;
+  }
+
+  .assessment-card-title {
+    color: var(--mobile-text);
+    font-size: 0.725rem;
+    font-weight: 700;
+  }
+
+  .assessment-status-badge.authorized {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+    font-size: 0.625rem;
+  }
+
+  .assessment-body-text {
+    color: var(--mobile-text-secondary);
+    font-size: 0.775rem;
+    line-height: 1.5;
+  }
+
+  .assessment-signature-row {
+    color: var(--mobile-text-muted);
+    font-size: 0.7rem;
+  }
+
+  /* Drawer Backdrop Overlay */
+  .drawer-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.48);
+    backdrop-filter: blur(4px);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .drawer-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Info Modal in Light Mode */
   .modal-card {
+    background: var(--mobile-surface);
+    color: var(--mobile-text);
+    border: 1px solid var(--mobile-border);
+    box-shadow: var(--mobile-shadow-lg);
+    border-radius: var(--radius-lg);
     max-width: 95vw;
     max-height: 90vh;
     overflow-y: auto;
   }
+
+  .modal-title {
+    color: var(--mobile-text);
+  }
+
+  .info-modal-content {
+    color: var(--mobile-text-secondary);
+  }
+
+  .info-modal-content h3,
+  .info-modal-content h4 {
+    color: var(--mobile-text);
+  }
+
+  .protocol-spec-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .protocol-spec-box.ag-box {
+    background: #f0f9ff;
+    border-color: #bae6fd;
+    color: #0c4a6e;
+  }
+
+  .protocol-spec-box.cg-box {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #881337;
+  }
 }
 
-/* Small Smartphone Screens (max-width: 480px) */
+/* Ultra-compact Phones (max-width: 480px) */
 @media (max-width: 480px) {
   .scan-viewer-app {
-    padding: 0.65rem 0.5rem 2rem;
+    padding: 0.4rem 0.5rem 1.8rem;
   }
   .top-nav {
-    padding: 0.5rem 0.65rem;
+    padding: 0.45rem 0.6rem;
   }
   .scan-pill-btn {
-    padding: 0.4rem 0.35rem;
+    padding: 0.35rem 0.35rem;
     font-size: 0.725rem;
   }
   .scan-pill-btn .pill-tag {
-    font-size: 0.65rem;
-    padding: 1px 5px;
+    font-size: 0.625rem;
+    padding: 1px 4px;
   }
   .large-player-frame {
     max-height: 62vw;
   }
-  .ultrasound-hud {
-    font-size: 8px;
-    padding: 3px 6px;
-  }
   .step-card {
-    flex: 0 0 155px;
-  }
-  .step-card-badge-step {
-    font-size: 0.6rem;
-    padding: 1px 4px;
-  }
-  .step-card-duration {
-    font-size: 0.6rem;
-  }
-  .ctrl-btn {
-    padding: 4px;
-  }
-  .frame-step-btn {
-    display: none; /* Hide frame step buttons on very small screens to fit play, scrubber, speed */
+    flex: 0 0 150px;
   }
 }
 
 /* Landscape Phone Mode (max-height: 500px and orientation: landscape) */
 @media (max-height: 500px) and (orientation: landscape) {
   .top-nav {
-    padding: 0.4rem 0.75rem;
+    padding: 0.35rem 0.75rem;
   }
   .scan-selection-section {
-    display: none; /* In landscape viewing, focus entirely on the video workspace */
+    display: none !important;
   }
   .large-player-frame {
-    max-height: 70vh;
+    max-height: 72vh;
   }
   .step-card {
-    flex: 0 0 160px;
+    flex: 0 0 155px;
   }
 }

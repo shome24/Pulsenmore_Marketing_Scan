@@ -60,6 +60,15 @@
         </svg>
         <span class="btn-label">Protocol Info</span>
       </button>
+      <!-- Mobile Only Menu / Details Drawer Button -->
+      <button class="mobile-menu-btn" id="btnMobileMenu" aria-label="Open Case Details Menu" title="Case Details & Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span class="mobile-menu-text">Menu</span>
+      </button>
     </div>
   </header>
 
@@ -165,6 +174,13 @@
           <div class="active-step-title-row">
             <span class="step-counter-tag" id="activeStepCounterTag">Step 1 of 5</span>
             <span class="step-name-heading" id="activeStepNameHeading">Step 1: Scan Overview & Anatomical Landmarks</span>
+            <!-- Mobile quick details link -->
+            <button class="mobile-details-pill" id="btnOpenDrawerFromHeader" aria-label="View case details">
+              <span>Details</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -354,8 +370,29 @@
           </div>
         </div>
 
-        <!-- Right Column: Case Properties & Clinical Review -->
-        <aside class="case-properties-column">
+        <!-- Right Column / Mobile Slide-Over Drawer: Case Properties & Clinical Review -->
+        <aside class="case-properties-column" id="casePropertiesColumn">
+          <!-- Mobile Drawer Header (Visible on Mobile Only) -->
+          <div class="drawer-header-mobile">
+            <div class="drawer-title-wrap">
+              <span class="drawer-subtitle">CLINICAL INFORMATION</span>
+              <h3 class="drawer-heading">Scan Details & Protocol</h3>
+            </div>
+            <button class="drawer-close-btn" id="btnCloseDrawer" aria-label="Close menu">&times;</button>
+          </div>
+
+          <!-- Mobile Drawer Quick Actions -->
+          <div class="drawer-mobile-action">
+            <button class="action-btn drawer-download-btn" id="btnDownloadClipDrawer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Active Step Clip</span>
+            </button>
+          </div>
+
           <!-- Tab Navigation -->
           <div class="properties-tabs-nav">
             <button class="prop-tab-btn active" data-tab="properties">CASE PROPERTIES</button>
@@ -465,6 +502,9 @@
             </div>
           </div>
         </aside>
+
+        <!-- Backdrop Overlay for Mobile Drawer -->
+        <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
       </div>
     </section>
   </main>

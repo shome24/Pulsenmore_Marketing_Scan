@@ -211,7 +211,13 @@
     carouselScrollRight: document.getElementById('carouselScrollRight'),
     stepCarouselTrack: document.getElementById('stepCarouselTrack'),
 
-    // Case Properties Sidebar
+    // Case Properties Sidebar & Mobile Drawer
+    casePropertiesColumn: document.getElementById('casePropertiesColumn'),
+    btnMobileMenu: document.getElementById('btnMobileMenu'),
+    btnOpenDrawerFromHeader: document.getElementById('btnOpenDrawerFromHeader'),
+    btnCloseDrawer: document.getElementById('btnCloseDrawer'),
+    drawerBackdrop: document.getElementById('drawerBackdrop'),
+    btnDownloadClipDrawer: document.getElementById('btnDownloadClipDrawer'),
     propTabButtons: document.querySelectorAll('.prop-tab-btn'),
     paneProperties: document.getElementById('paneProperties'),
     paneParameters: document.getElementById('paneParameters'),
@@ -260,7 +266,7 @@
 
     // 3. Update Scan Header
     elements.activeModeBadge.textContent = scan.modeLabel;
-    elements.activeModeBadge.className = `active-mode-badge ${scan.mode.toLowerCase()}`;
+    elements.activeModeBadge.className = `active-mode-badge ${scan.mode.toLowerCase()} ${scan.mode === 'AG' ? 'ag-mode-active' : ''}`;
     elements.activeScanHeading.textContent = `${scan.name} — Gestational ${scan.gestationalAge}`;
     elements.activeKeyBadge.textContent = scan.key;
 
@@ -740,6 +746,25 @@
       elements.infoModal.classList.remove('open');
     });
 
+    // Mobile Drawer Open / Close Handlers
+    function openDrawer() {
+      if (elements.casePropertiesColumn) elements.casePropertiesColumn.classList.add('open');
+      if (elements.drawerBackdrop) elements.drawerBackdrop.classList.add('open');
+      document.body.classList.add('drawer-open');
+    }
+
+    function closeDrawer() {
+      if (elements.casePropertiesColumn) elements.casePropertiesColumn.classList.remove('open');
+      if (elements.drawerBackdrop) elements.drawerBackdrop.classList.remove('open');
+      document.body.classList.remove('drawer-open');
+    }
+
+    if (elements.btnMobileMenu) elements.btnMobileMenu.addEventListener('click', openDrawer);
+    if (elements.btnOpenDrawerFromHeader) elements.btnOpenDrawerFromHeader.addEventListener('click', openDrawer);
+    if (elements.btnCloseDrawer) elements.btnCloseDrawer.addEventListener('click', closeDrawer);
+    if (elements.drawerBackdrop) elements.drawerBackdrop.addEventListener('click', closeDrawer);
+    if (elements.btnDownloadClipDrawer) elements.btnDownloadClipDrawer.addEventListener('click', triggerDownload);
+
     // Global Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT') return;
@@ -760,9 +785,14 @@
       } else if (e.key === 'f' || e.key === 'F') {
         e.preventDefault();
         elements.btnFullscreen.click();
-      } else if (e.key === 'Escape' && elements.infoModal.classList.contains('open')) {
-        elements.infoModal.style.display = 'none';
-        elements.infoModal.classList.remove('open');
+      } else if (e.key === 'Escape') {
+        if (elements.infoModal.classList.contains('open')) {
+          elements.infoModal.style.display = 'none';
+          elements.infoModal.classList.remove('open');
+        }
+        if (elements.casePropertiesColumn && elements.casePropertiesColumn.classList.contains('open')) {
+          closeDrawer();
+        }
       }
     });
   }
